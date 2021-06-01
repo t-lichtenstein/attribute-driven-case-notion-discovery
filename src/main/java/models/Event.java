@@ -68,7 +68,10 @@ public class Event extends EstimationElement {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("[" + this.getCaseId() + "] " + this.getId() + ": " + this.getActivity() + " (");
+        if (!this.getCaseId().equals("")) {
+            sb.append("[" + this.getCaseId() + "] ");
+        }
+        sb.append(this.getId() + ": " + this.getActivity() + " (");
         this.getAttributes().entrySet().stream().forEach(attribute -> {
             sb.append(attribute.getKey() + " -> " + attribute.getValue() + ", ");
         });

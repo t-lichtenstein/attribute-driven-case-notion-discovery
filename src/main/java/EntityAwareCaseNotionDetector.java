@@ -22,6 +22,7 @@ public class EntityAwareCaseNotionDetector {
     options.addOption("s", "separator", true, "Set column separator of the CSV-file specified as input (default: ';')");
     options.addOption("t", "threshold", true, "Set similarity threshold 0 <= t <= 1\n(default: 0.7)");
     options.addOption("v", "verbose", false, "Enable detailed console output");
+    options.addOption("d", "debugging", false, "Enable debugging mode");
     options.addOption("h", "help", false, "Show available options");
 
     String inputFilePath = "";
@@ -29,6 +30,7 @@ public class EntityAwareCaseNotionDetector {
     String columnSeparator = ";";
     double selectedSimilarityThreshold = 0.7;
     boolean verbose = false;
+    boolean debuggingMode = false;
 
     CommandLineParser parser = new DefaultParser();
     HelpFormatter formatter = new HelpFormatter();
@@ -54,9 +56,8 @@ public class EntityAwareCaseNotionDetector {
       if (cmd.hasOption("s")) {
         columnSeparator = cmd.getOptionValue("s");
       }
-      if (cmd.hasOption("v")) {
-        verbose = true;
-      }
+      verbose = cmd.hasOption("v");
+      debuggingMode = cmd.hasOption("d");
     } catch (ParseException e) {
       e.printStackTrace();
       System.exit(1);
@@ -69,7 +70,7 @@ public class EntityAwareCaseNotionDetector {
     String inputFileName = "";
 
     try {
-      eventList = CSVImporter.load(inputFilePath, columnSeparator);
+      eventList = CSVImporter.load(inputFilePath, columnSeparator, debuggingMode);
       inputFileName = Paths.get(inputFilePath).getFileName().toString();
       int dotIndex = inputFileName.lastIndexOf(".");
       inputFileName = (dotIndex == -1) ? inputFileName : inputFileName.substring(0, dotIndex);
@@ -116,8 +117,8 @@ public class EntityAwareCaseNotionDetector {
 
     System.out.println("Detecting object lifecycles... ");
     List<Future<Void>> lifecycleThreads = ConcurrencyHelper.startAll(executor, objectClasses.stream()
-            .map(objectClass -> new ObjectLifecycleDetector(objectClass, similarityThreshold))
-            .collect(Collectors.toList()));
+        .map(objectClass -> new ObjectLifecycleDetector(objectClass, similarityThreshold))
+        .collect(Collectors.toList()));
     ConcurrencyHelper.syncAll(lifecycleThreads);
 
     System.out.println("done.\n");
