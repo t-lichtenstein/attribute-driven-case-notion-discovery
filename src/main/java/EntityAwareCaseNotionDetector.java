@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
-public class CaseNotionDetector {
+public class EntityAwareCaseNotionDetector {
 
   public static void main(String[] args) {
 
@@ -19,14 +19,14 @@ public class CaseNotionDetector {
     Options options = new Options();
     options.addOption("i", "input", true, "Specify location of the CSV-file representing the unlabeled event log taken as input");
     options.addOption("o", "output", true, "Specify directory for the resulting XES-logs");
-    options.addOption("s", "separator", true, "Set column separator of the CSV-file specified as input");
+    options.addOption("s", "separator", true, "Set column separator of the CSV-file specified as input (default: ';')");
     options.addOption("t", "threshold", true, "Set similarity threshold 0 <= t <= 1\n(default: 0.7)");
     options.addOption("v", "verbose", false, "Enable detailed console output");
     options.addOption("h", "help", false, "Show available options");
 
     String inputFilePath = "";
     String outputDirectoryPath = "";
-    String columnSeparator = ",";
+    String columnSeparator = ";";
     double selectedSimilarityThreshold = 0.7;
     boolean verbose = false;
 
@@ -35,7 +35,11 @@ public class CaseNotionDetector {
     try {
       CommandLine cmd = parser.parse(options, args);
       if (cmd.hasOption("h")) {
-        formatter.printHelp( "caseNotionDetector [OPTIONS] -i [CSV-FILE] -o [DIRECTORY]", options );
+        formatter.printHelp( "java -jar entity-aware-case-notion-detection.jar [OPTIONS] -i [CSV-FILE] -o [DIRECTORY]", options );
+        System.exit(0);
+      }
+      if (!cmd.hasOption("i") || !cmd.hasOption("o")) {
+        System.out.println("Please provide an input event log (-i) and an output directory (-o) via the command line arguments");
         System.exit(0);
       }
       inputFilePath = cmd.getOptionValue("i");

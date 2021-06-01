@@ -7,7 +7,7 @@
     <groupId>org.example</groupId>
     <artifactId>entity-aware-case-notion-detection</artifactId>
     <version>1.0-SNAPSHOT</version>
-
+    <packaging>jar</packaging>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/commons-cli/commons-cli -->
         <dependency>
