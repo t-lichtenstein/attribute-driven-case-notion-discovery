@@ -1,4 +1,4 @@
-# Entity-aware Case Notion Discovery
+# Attribute-driven Case Notion Discovery
 
 Discovers a case notion for an unlabeled event log using optional attributes and produces an XES-file that can be used for process mining purposes.
 
@@ -44,4 +44,4 @@ The tool will ask for a root object class that determines the traces, which can 
 
 ## Requirements
 
-For the tool to run, a working installation of <mark>Java 8</mark> is required. The execution benefits from the presence of multiple CPU cores. For development, we recommend using IntelliJ IDEA 2021.1 or newer.
+For the tool to run, a working installation of <mark>Java 8</mark> is required. The execution benefits from the presence of multiple CPU cores. For development, an installation of Maven is mandatory, and the openXES library has to be included (a JAR file is provided in the resources directory). We recommend using IntelliJ IDEA 2021.1 or newer.
