@@ -137,7 +137,7 @@ public class EntityAwareCaseNotionDetector {
 
     // Print life cycle for each object class
     for (ObjectClass objectClass : objectClasses) {
-      System.out.println("\nTable: " + objectClass.getName() + "\n(extracted " + objectClass.getInstances().size() + " instances from " + objectClass.getRelevantEvents().size() + " events)\n");
+      System.out.println("\nClass: " + objectClass.getName() + "\n(extracted " + objectClass.getInstances().size() + " instances from " + objectClass.getRelevantEvents().size() + " events)\n");
       System.out.println(objectClass.getLifecycle());
     }
 

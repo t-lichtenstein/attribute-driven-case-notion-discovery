@@ -17,11 +17,13 @@ public class CSVImporter {
     int caseIdColumnIndex = -1;
     int timestampColumnIndex = 0;
     int activityColumnIndex = 1;
+    int firstOptionalAttributeColumnIndex = 2;
 
     if (debuggingMode) {
       caseIdColumnIndex = 0;
       timestampColumnIndex = 1;
       activityColumnIndex = 2;
+      firstOptionalAttributeColumnIndex = 3;
     }
 
     List<Event> events = new ArrayList<>();
@@ -37,7 +39,7 @@ public class CSVImporter {
       String caseId = debuggingMode ? data[caseIdColumnIndex] : "";
       Long timestamp = Long.parseLong(data[timestampColumnIndex]);
       String activity = data[activityColumnIndex];
-      for (int i = 3; i < data.length; i++) {
+      for (int i = firstOptionalAttributeColumnIndex; i < data.length; i++) {
         if (!data[i].equals("")) {
           attributes.put(columns[i], data[i]);
         }
