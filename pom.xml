@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>case-notion-detector</artifactId>
+    <artifactId>entity-aware-case-notion-detection</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
@@ -20,11 +20,6 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>30.1-jre</version>
-        </dependency>
-        <dependency>
-            <groupId>guru.nidi</groupId>
-            <artifactId>graphviz-java</artifactId>
-            <version>0.18.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.jdom/jdom -->
         <dependency>

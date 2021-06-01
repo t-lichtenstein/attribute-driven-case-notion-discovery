@@ -1,7 +1,5 @@
 package models;
 
-import com.kitfox.svg.A;
-
 import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
